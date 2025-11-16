@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MyGroceryFinder</string>
-    <string name="grocery_image_desc">Grocery item image</string>
+    <string name="app_name">My Game Browser</string>
+    <string name="game_image_desc">Game thumbnail</string>
 </resources>

@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.codepath.asynchttpclient.AsyncHttpClient
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import okhttp3.Headers
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rvGroceries: RecyclerView
-    private val groceryList = mutableListOf<GroceryItem>()
-    private lateinit var adapter: GroceryAdapter
+    private val gameList = mutableListOf<GameItem>()
+    private lateinit var adapter: GameAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,30 +22,56 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize RecyclerView
         rvGroceries = findViewById(R.id.grocery_list)
-        adapter = GroceryAdapter(groceryList)
+        adapter = GameAdapter(gameList)
         rvGroceries.adapter = adapter
         rvGroceries.layoutManager = LinearLayoutManager(this)
 
-
+        // Optional: Add dividers between list items
         rvGroceries.addItemDecoration(
             DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         )
 
-
-        loadSampleGroceries()
+        // Fetch game data from API
+        fetchGames()
     }
 
-    private fun loadSampleGroceries() {
-        val sampleItems = listOf(
-            GroceryItem("Milk", "Dairy", "https://upload.wikimedia.org/wikipedia/commons/4/4c/Milk_glass.jpg"),
-            GroceryItem("Eggs", "Dairy", "https://upload.wikimedia.org/wikipedia/commons/7/7b/Eggs_carton.jpg"),
-            GroceryItem("Apples", "Produce", "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg"),
-            GroceryItem("Bread", "Bakery", "https://upload.wikimedia.org/wikipedia/commons/d/d3/Freshly_baked_bread.jpg")
-        )
+    private fun fetchGames() {
+        val client = AsyncHttpClient()
+        val url = "https://www.freetogame.com/api/games?platform=pc"
 
-        groceryList.addAll(sampleItems)
-        adapter.notifyDataSetChanged()
+        client.get(url, object : JsonHttpResponseHandler() {
 
-        Log.d("GroceryList", "Loaded sample groceries successfully!")
+            override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
+                try {
+                    val games = json.jsonArray
+
+                    for (i in 0 until games.length()) {
+                        val item = games.getJSONObject(i)
+
+                        val title = item.getString("title")
+                        val genre = item.getString("genre")
+                        val publisher = item.getString("publisher")
+                        val thumbnail = item.getString("thumbnail")
+
+                        gameList.add(GameItem(title, genre, publisher, thumbnail))
+                    }
+
+                    adapter.notifyDataSetChanged()
+                    Log.d("GameList", "Loaded games successfully! (${gameList.size} items)")
+
+                } catch (e: Exception) {
+                    Log.e("GameList", "Error parsing JSON: ${e.message}")
+                }
+            }
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Headers?,
+                errorResponse: String,
+                throwable: Throwable?
+            ) {
+                Log.e("GameList", "Failed to load games: $errorResponse")
+            }
+        })
     }
 }

@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class GroceryAdapter(private val groceryList: List<GroceryItem>) :
-    RecyclerView.Adapter<GroceryAdapter.ViewHolder>() {
+class GameAdapter(private val gameList: List<GameItem>) :
+    RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val groceryImage: ImageView = view.findViewById(R.id.groceryImage)
-        val groceryName: TextView = view.findViewById(R.id.groceryName)
-        val groceryCategory: TextView = view.findViewById(R.id.groceryCategory)
+        val gameImage: ImageView = view.findViewById(R.id.gameImage)
+        val gameTitle: TextView = view.findViewById(R.id.gameTitle)
+        val gameCategory: TextView = view.findViewById(R.id.gameCategory)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,25 +25,24 @@ class GroceryAdapter(private val groceryList: List<GroceryItem>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val grocery = groceryList[position]
+        val game = gameList[position]
 
-        holder.groceryName.text = grocery.name
-        holder.groceryCategory.text = "Category: ${grocery.category}"
+        holder.gameTitle.text = game.title
+        holder.gameCategory.text = "Category: ${game.genre}"
 
-        // Load image using Glide
         Glide.with(holder.itemView)
-            .load(grocery.imageUrl)
+            .load(game.thumbnail)
             .centerCrop()
-            .into(holder.groceryImage)
+            .into(holder.gameImage)
 
         holder.itemView.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,
-                "You tapped on ${grocery.name}!",
+                "You tapped on ${game.title}!",
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
 
-    override fun getItemCount() = groceryList.size
+    override fun getItemCount() = gameList.size
 }
