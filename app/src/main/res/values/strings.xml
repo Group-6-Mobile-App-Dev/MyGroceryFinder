@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyGroceryFinder</string>
+    <string name="grocery_image_desc">Grocery item image</string>
+</resources>
