@@ -1,4 +1,4 @@
-package com.example.mygroceryfinder
+package com.example.freetoplayfinder
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

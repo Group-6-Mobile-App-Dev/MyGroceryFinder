@@ -1,4 +1,4 @@
-package com.example.mygroceryfinder
+package com.example.freetoplayfinder
 
 data class GameItem(
     val title: String,

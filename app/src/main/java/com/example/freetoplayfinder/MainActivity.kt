@@ -1,7 +1,13 @@
-package com.example.mygroceryfinder
+package com.example.freetoplayfinder
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SearchView
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,18 +26,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize RecyclerView
         rvGroceries = findViewById(R.id.grocery_list)
         adapter = GameAdapter(gameList)
         rvGroceries.adapter = adapter
         rvGroceries.layoutManager = LinearLayoutManager(this)
 
-        // Optional: Add dividers between list items
         rvGroceries.addItemDecoration(
             DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         )
 
-        // Fetch game data from API
+
+        rvGroceries.setOnTouchListener { v, event ->
+            Log.d("SCROLLTEST", "TOUCH event received by RecyclerView")
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            false
+        }
+
+        rvGroceries.setOnScrollChangeListener { _, _, _, _, _ ->
+            Log.d("SCROLLTEST", "RecyclerView is scrolling!")
+        }
+
+        // Search bar
+        val searchView = findViewById<SearchView>(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = false
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter(newText ?: "")
+                return true
+            }
+        })
+
         fetchGames()
     }
 
@@ -56,11 +80,13 @@ class MainActivity : AppCompatActivity() {
                         gameList.add(GameItem(title, genre, publisher, thumbnail))
                     }
 
+                    val genreSet = gameList.map { it.genre }.toSet().sorted()
+                    setupGenreSpinner(genreSet)
+
                     adapter.notifyDataSetChanged()
-                    Log.d("GameList", "Loaded games successfully! (${gameList.size} items)")
 
                 } catch (e: Exception) {
-                    Log.e("GameList", "Error parsing JSON: ${e.message}")
+                    Log.e("GameList", "Error: ${e.message}")
                 }
             }
 
@@ -70,8 +96,38 @@ class MainActivity : AppCompatActivity() {
                 errorResponse: String,
                 throwable: Throwable?
             ) {
-                Log.e("GameList", "Failed to load games: $errorResponse")
+                Log.e("GameList", "Failed: $errorResponse")
             }
         })
+    }
+
+    private fun setupGenreSpinner(genres: List<String>) {
+        val spinner = findViewById<Spinner>(R.id.categorySpinner)
+
+        val items = mutableListOf("All Genres")
+        items.addAll(genres)
+
+        val spinnerAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            items
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = spinnerAdapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selected = items[position]
+                adapter.filterByGenre(selected)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 }
