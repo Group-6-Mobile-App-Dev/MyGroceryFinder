@@ -69,6 +69,9 @@ Here's a video that demos all of the app's implemented features:
 
 VIDEO created with **your chosen video tool**
 
+URL https://youtu.be/9lFNzi1SrQQ
+
+
 ## Notes
 
 Here's a place for any other notes on this milestone!
