@@ -57,7 +57,7 @@ Here are a few GIFs that showcase the progress we've made working on our app:
 
 - A more updated showcase of the sorting feature and the options we've included:
 
-<img src='https://i.imgur.com/uMbBhWi.gif' title='Project Demo 2' width='' alt='Project Demo 2' />
+<img src='https://i.imgur.com/uMbBhWi.gif' title='Video Demo' width='' alt='Video Demo' />
 
 GIFs hosted on **Imgur**
 
