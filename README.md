@@ -65,11 +65,10 @@ GIFs hosted on **Imgur**
 
 Here's a video that demos all of the app's implemented features:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Demo' width='' alt='Video Demo' />
+URL: https://youtu.be/9lFNzi1SrQQ
 
-VIDEO created with **your chosen video tool**
+VIDEO hosted on **YouTube**
 
-URL https://youtu.be/9lFNzi1SrQQ
 
 
 ## Notes
