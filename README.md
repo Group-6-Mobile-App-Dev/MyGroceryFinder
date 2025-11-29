@@ -53,11 +53,11 @@ Here are a few GIFs that showcase the progress we've made working on our app:
 
 - An initial GIF showcasing the usage of our app along with some of the code that makes it run:
 
-<img src='https://i.imgur.com/o4EA0mY.gif' title='Build Progress 1' width='' alt='Build Progress 1' />
+<img src='https://i.imgur.com/Hao0oMH.gif' title='Build Progress 1' width='' alt='Build Progress 1' />
 
 - A more updated showcase of the sorting feature and the options we've included:
 
-<img src='https://i.imgur.com/uMbBhWi.gif' title='Video Demo' width='' alt='Video Demo' />
+<img src='https://i.imgur.com/UtSe1oV.gif' title='Build Demo 2' width='' alt='Build Demo 2' />
 
 GIFs hosted on **Imgur**
 
