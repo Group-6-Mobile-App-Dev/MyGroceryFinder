@@ -3,7 +3,6 @@ package com.example.freetoplayfinder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
@@ -34,17 +33,6 @@ class MainActivity : AppCompatActivity() {
         rvGroceries.addItemDecoration(
             DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         )
-
-
-        rvGroceries.setOnTouchListener { v, event ->
-            Log.d("SCROLLTEST", "TOUCH event received by RecyclerView")
-            v.parent.requestDisallowInterceptTouchEvent(true)
-            false
-        }
-
-        rvGroceries.setOnScrollChangeListener { _, _, _, _, _ ->
-            Log.d("SCROLLTEST", "RecyclerView is scrolling!")
-        }
 
         // Search bar
         val searchView = findViewById<SearchView>(R.id.searchView)
@@ -82,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 
                     val genreSet = gameList.map { it.genre }.toSet().sorted()
                     setupGenreSpinner(genreSet)
+                    setupSortSpinner()
 
                     adapter.notifyDataSetChanged()
 
@@ -101,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // so this genre spinner will filter the games by genre and the user can select from the range of geners
     private fun setupGenreSpinner(genres: List<String>) {
         val spinner = findViewById<Spinner>(R.id.categorySpinner)
 
@@ -125,6 +115,47 @@ class MainActivity : AppCompatActivity() {
             ) {
                 val selected = items[position]
                 adapter.filterByGenre(selected)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    // i just recently added this, i felt having a sort option would make the app more interactive
+    private fun setupSortSpinner() {
+        val spinner = findViewById<Spinner>(R.id.sortSpinner)
+
+        val options = listOf(
+            "Sort By: Default",
+            "Title (A–Z)",
+            "Title (Z–A)",
+            "Genre",
+            "Publisher"
+        )
+
+        val spinnerAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            options
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = spinnerAdapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> adapter.sortByDefault()
+                    1 -> adapter.sortByTitleAZ()
+                    2 -> adapter.sortByTitleZA()
+                    3 -> adapter.sortByGenreSort()
+                    4 -> adapter.sortByPublisherSort()
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}

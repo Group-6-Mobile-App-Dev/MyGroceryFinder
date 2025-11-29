@@ -43,6 +43,7 @@ class GameAdapter(private val fullList: List<GameItem>) :
     override fun getItemCount() = displayList.size
 
 
+    // i put in the filter function so users can search for whatever game by their fav genre
     private fun applyFilters() {
         val searchLower = currentSearch.lowercase()
 
@@ -68,5 +69,31 @@ class GameAdapter(private val fullList: List<GameItem>) :
     fun filterByGenre(genre: String) {
         currentGenre = genre
         applyFilters()
+    }
+
+    // added a sort function to make the app more friendly and interactive
+    fun sortByDefault() {
+        displayList = fullList.toMutableList()
+        applyFilters()
+    }
+
+    fun sortByTitleAZ() {
+        displayList.sortBy { it.title.lowercase() }
+        notifyDataSetChanged()
+    }
+
+    fun sortByTitleZA() {
+        displayList.sortByDescending { it.title.lowercase() }
+        notifyDataSetChanged()
+    }
+
+    fun sortByGenreSort() {
+        displayList.sortBy { it.genre.lowercase() }
+        notifyDataSetChanged()
+    }
+
+    fun sortByPublisherSort() {
+        displayList.sortBy { it.publisher.lowercase() }
+        notifyDataSetChanged()
     }
 }

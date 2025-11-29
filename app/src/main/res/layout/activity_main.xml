@@ -5,9 +5,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2">
+    android:background="#F2F2F2"
+    android:fitsSystemWindows="true">
 
-<!-- top section-->
     <LinearLayout
         android:id="@+id/topCard"
         android:layout_width="match_parent"
@@ -24,13 +24,18 @@
             android:layout_height="wrap_content"
             android:queryHint="Search games..."
             android:iconifiedByDefault="false"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:clickable="true"
             android:descendantFocusability="afterDescendants"/>
 
+        <!-- Genre Filter -->
         <Spinner
             android:id="@+id/categorySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Sort By Dropdown -->
+        <Spinner
+            android:id="@+id/sortSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
