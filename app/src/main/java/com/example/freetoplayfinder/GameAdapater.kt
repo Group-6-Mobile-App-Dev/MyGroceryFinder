@@ -1,5 +1,6 @@
 package com.example.freetoplayfinder
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,19 +39,34 @@ class GameAdapter(private val fullList: List<GameItem>) :
             .load(game.thumbnail)
             .centerCrop()
             .into(holder.gameImage)
+
+
+        holder.itemView.setOnClickListener {
+            val ctx = holder.itemView.context
+            val intent = Intent(ctx, DetailsActivity::class.java)
+
+            intent.putExtra("title", game.title)
+            intent.putExtra("genre", game.genre)
+            intent.putExtra("publisher", game.publisher)
+            intent.putExtra("thumbnail", game.thumbnail)
+
+
+            intent.putExtra("description", game.shortDescription ?: "No description available.")
+
+            ctx.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = displayList.size
 
 
-    // i put in the filter function so users can search for whatever game by their fav genre
+    // the inital filter section
+
     private fun applyFilters() {
         val searchLower = currentSearch.lowercase()
 
         displayList = fullList.filter { item ->
-
             val matchesSearch = item.title.lowercase().contains(searchLower)
-
             val matchesGenre =
                 currentGenre == "All Genres" ||
                         item.genre.equals(currentGenre, ignoreCase = true)
@@ -71,29 +87,31 @@ class GameAdapter(private val fullList: List<GameItem>) :
         applyFilters()
     }
 
-    // added a sort function to make the app more friendly and interactive
-    fun sortByDefault() {
+
+    // so this was the sort section i added because i felt the sorting only by genere was lame
+
+    fun resetSort() {
         displayList = fullList.toMutableList()
         applyFilters()
     }
 
     fun sortByTitleAZ() {
-        displayList.sortBy { it.title.lowercase() }
+        displayList.sortBy { it.title }
         notifyDataSetChanged()
     }
 
     fun sortByTitleZA() {
-        displayList.sortByDescending { it.title.lowercase() }
+        displayList.sortByDescending { it.title }
         notifyDataSetChanged()
     }
 
     fun sortByGenreSort() {
-        displayList.sortBy { it.genre.lowercase() }
+        displayList.sortBy { it.genre }
         notifyDataSetChanged()
     }
 
     fun sortByPublisherSort() {
-        displayList.sortBy { it.publisher.lowercase() }
+        displayList.sortBy { it.publisher }
         notifyDataSetChanged()
     }
 }

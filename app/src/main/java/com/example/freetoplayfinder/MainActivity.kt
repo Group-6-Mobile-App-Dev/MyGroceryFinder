@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
             DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         )
 
-        // Search bar
         val searchView = findViewById<SearchView>(R.id.searchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?) = false
@@ -64,8 +63,17 @@ class MainActivity : AppCompatActivity() {
                         val genre = item.getString("genre")
                         val publisher = item.getString("publisher")
                         val thumbnail = item.getString("thumbnail")
+                        val description = item.getString("short_description")
 
-                        gameList.add(GameItem(title, genre, publisher, thumbnail))
+                        gameList.add(
+                            GameItem(
+                                title,
+                                genre,
+                                publisher,
+                                thumbnail,
+                                description
+                            )
+                        )
                     }
 
                     val genreSet = gameList.map { it.genre }.toSet().sorted()
@@ -90,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    // so this genre spinner will filter the games by genre and the user can select from the range of geners
     private fun setupGenreSpinner(genres: List<String>) {
         val spinner = findViewById<Spinner>(R.id.categorySpinner)
 
@@ -106,7 +113,6 @@ class MainActivity : AppCompatActivity() {
         spinner.adapter = spinnerAdapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -121,7 +127,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // i just recently added this, i felt having a sort option would make the app more interactive
     private fun setupSortSpinner() {
         val spinner = findViewById<Spinner>(R.id.sortSpinner)
 
@@ -139,10 +144,10 @@ class MainActivity : AppCompatActivity() {
             options
         )
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         spinner.adapter = spinnerAdapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -150,7 +155,7 @@ class MainActivity : AppCompatActivity() {
                 id: Long
             ) {
                 when (position) {
-                    0 -> adapter.sortByDefault()
+                    0 -> adapter.resetSort()
                     1 -> adapter.sortByTitleAZ()
                     2 -> adapter.sortByTitleZA()
                     3 -> adapter.sortByGenreSort()

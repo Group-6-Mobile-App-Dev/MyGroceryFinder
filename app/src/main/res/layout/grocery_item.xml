@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="@android:color/white">
 
+    <!-- i really wanted the game image to be like at the forefront  -->
     <ImageView
         android:id="@+id/gameImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:adjustViewBounds="true"
+        android:background="#DDD" />
 
+    <!-- i was going for a nice kind of steam-like layout to showcase the game image/title -->
     <TextView
         android:id="@+id/gameTitle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Game Title"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="8dp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/gameImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="18sp"
+        android:textColor="#000"/>
 
+    <!-- this will go ahead and show the games genere -->
     <TextView
         android:id="@+id/gameCategory"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Genre: Action"
+        android:text="Genre: Shooter"
         android:textSize="14sp"
-        android:textColor="#555555"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintTop_toBottomOf="@id/gameTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="2dp"
+        android:textColor="#555"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

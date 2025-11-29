@@ -26,14 +26,14 @@
             android:iconifiedByDefault="false"
             android:descendantFocusability="afterDescendants"/>
 
-        <!-- Genre Filter -->
+        <!-- initally all i had was this genere filter but i wanted to make it more interactive -->
         <Spinner
             android:id="@+id/categorySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
 
-        <!-- Sort By Dropdown -->
+        <!-- i figured having a sort function would just be more convenient for the user -->
         <Spinner
             android:id="@+id/sortSpinner"
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"/>
     </LinearLayout>
 
-<!--game list that scrolls-->
+<!--you can scroll with your keyboard key or by holding down the mouse-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/grocery_list"
         android:layout_width="match_parent"
