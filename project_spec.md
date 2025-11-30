@@ -28,14 +28,14 @@ Free-To-Play Finder is an app that pulls from the FreeToGame database, a compila
 
 Required Features:
 
-- User can search for apps
-- User can see app icons/headers in the results
+- User can search for games
+- User can see game icons/headers in the results
 - User can filter based on genre
 
 Stretch Features:
 - User can filter by publisher, genre, or alphabetically
 - User can scroll by clicking and dragging mouse or with keyboard
-- User can click on game as they scroll and view a short description
+- User can click on the game as they scroll and view a short description
 
 ### 2. Chosen API(s)
 
@@ -49,7 +49,7 @@ FreeToGame API
 - Get game thumbnail
   - We get the game thumbnail from the API
 - Get game description
-  - We get the short game descriptoin from the API
+  - We get the short game description from the API
 
 ### 3. User Interaction
 
@@ -60,7 +60,7 @@ Required Feature
 - User selects a game
   - => It shows more details about the game
 - User selects sort by
-  - => It gives user to option to sort by default, a-z, z-a, genre, or publisher
+  - => It gives user the option to sort by default, a-z, z-a, genre, or publisher
 
 ## Wireframes
 
