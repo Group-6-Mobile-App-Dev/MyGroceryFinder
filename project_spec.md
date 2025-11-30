@@ -83,6 +83,8 @@ Here are a few GIFs that showcase the progress we've made working on our app:
 
 - An initial GIF showcasing the usage of our app along with some of the code that makes it run:
 
+1[Build Progress 1](https://i.imgur.com/Hao0oMH.gif)
+
 <img src='https://i.imgur.com/Hao0oMH.gif' title='Build Progress 1' width='' alt='Build Progress 1' />
 
 - A more updated showcase of the sorting feature and the options we've included:
