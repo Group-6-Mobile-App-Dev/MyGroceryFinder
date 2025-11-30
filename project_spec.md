@@ -88,7 +88,7 @@ Here are a few GIFs that showcase the progress we've made working on our app:
 
 - A more updated showcase of the sorting feature and the options we've included:
 
-[Build Progress 2]([https://i.imgur.com/Hao0oMH.gif](https://i.imgur.com/UtSe1oV.gif))
+[Build Progress 2](https://i.imgur.com/UtSe1oV.gif)
 
 <img src='https://i.imgur.com/UtSe1oV.gif' title='Build Demo 2' width='' alt='Build Demo 2' />
 
