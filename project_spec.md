@@ -16,7 +16,6 @@ Free-To-Play Finder is an app that pulls from the FreeToGame database, a compila
 
 <!-- Evaluation of your app across the following attributes -->
 
-- **Category:
 - **Mobile:** This product experience's focal product is mobile games that are free to play. As such, it is perfectly fitting that this is a mobile application as well, for a convenient experience.
 - **Story:** The value of this app is quite clear to the audience, given that many app stores are difficult to navigate and riddled with ads. Our app is simple and to the point, featuring only free-to-play games.
 - **Market:** The market for this app would be quite large because mobile games are vastly popular worldwide, and no-cost games are appealing to everyone. The audience of this app ranges from kids to adults who game.
