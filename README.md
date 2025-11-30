@@ -10,6 +10,8 @@ Submitted by:
 
 Time spent: **6** hours spent in total
 
+*Note that our app topic has changed from milestone 1.
+
 ## 📜Summary
 
 This document provides a summary of our project building process for our app, **Free-To-Play Finder**. Free-To-Play Finder is an app that pulls from the FreeToGame database, a compilation of every game that is available to play for completely free on PC. Our app takes this information and formats it in a way that allows users to easily scroll and browse for games that could interest them. Users are then able to refine their search for games based on any particular genre or publisher that they are interested in.
