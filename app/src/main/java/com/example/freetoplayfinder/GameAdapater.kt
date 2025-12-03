@@ -11,9 +11,10 @@ import com.bumptech.glide.Glide
 
 class GameAdapter(private val fullList: List<GameItem>) :
     RecyclerView.Adapter<GameAdapter.ViewHolder>() {
-
+    // displayList is a mutable copy of the fullList used to apply searches, filtering, and sorting
+    // It is the final list of GameItems that are displayed to users in the app
     private var displayList: MutableList<GameItem> = fullList.toMutableList()
-
+    // These are updated with user selection when a search is typed or genre picked
     private var currentSearch = ""
     private var currentGenre = "All Genres"
 
@@ -63,25 +64,32 @@ class GameAdapter(private val fullList: List<GameItem>) :
     // the inital filter section
 
     private fun applyFilters() {
+        // set query to lower case
         val searchLower = currentSearch.lowercase()
 
         displayList = fullList.filter { item ->
+            // check if game title contains the searched word(s)
             val matchesSearch = item.title.lowercase().contains(searchLower)
+            // if all genres, accept all games, othwerwise only currentGenre
             val matchesGenre =
                 currentGenre == "All Genres" ||
                         item.genre.equals(currentGenre, ignoreCase = true)
 
+            // accepts item if both true, and replaces to displayList
             matchesSearch && matchesGenre
         }.toMutableList()
 
+        // ReyclerView UI is refreshed
         notifyDataSetChanged()
     }
 
+    // Applys filters and generates displayList when text is searched
     fun filter(query: String) {
         currentSearch = query
         applyFilters()
     }
 
+    // Applys filters and generates displayList when genre selected
     fun filterByGenre(genre: String) {
         currentGenre = genre
         applyFilters()
